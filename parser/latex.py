@@ -123,6 +123,12 @@ class Parser:
     extensions = ['.tex']
     def __init__ (self, raw, request, **kw):
         self.raw = raw
+        self.save_source_as_attachment = False
+        if kw.has_key('format_args'):
+            for arg in kw['format_args'].split(' '):
+                if arg == 'save_source_as_attachment':
+                    self.save_source_as_attachment = True
+        
         if len(self.raw)>0 and self.raw[0] == '#':
             self.raw[0] = '%'
         self.request = request
@@ -178,6 +184,8 @@ class Parser:
               data = open("%s/%s.tex" % (tmpdir, fn), "w")
               data.write(enctex)
               data.close()
+              if self.save_source_as_attachment:
+                  shutil.copyfile ("%s/%s.tex" % (tmpdir, fn), "%s/%s.tex" % (attachdir, fn))
               args = list(latex_args)
               args[-1] = args[-1] % fn
               res = call_command_in_dir(latex, args, tmpdir)
