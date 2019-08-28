@@ -1,3 +1,6 @@
+# 🚨🚨🚨DEPRECATED/NOT MAINTAINED 🚨🚨🚨
+-
+
 This repo is a clone of the existing latex parser for moin moin, and a place to store some changes I commonly find myself making.
 
 Original parser/code stores here:
